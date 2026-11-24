@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Experimenta ISO, abertura do diafragma e velocidade do obturador — agora também em realidade aumentada.">
-<title>Estúdio da Luz · RA</title>
+<title>Caçadores de Luz · RA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -121,7 +121,7 @@ footer{padding:22px max(5vw,16px);color:var(--soft);font-size:14px;border-top:1p
 <body>
 <a class="skip" href="#simulador">Saltar para o simulador</a>
 <nav aria-label="Principal">
-  <a class="brand" href="#inicio"><i></i>Estúdio da Luz</a>
+  <a class="brand" href="#inicio"><i></i>Caçadores de Luz</a>
   <a href="#simulador">Simulador</a>
   <a href="#desafios">Desafios</a>
   <a class="ra" href="#ra">Modo RA</a>
@@ -217,17 +217,11 @@ footer{padding:22px max(5vw,16px);color:var(--soft);font-size:14px;border-top:1p
       <button class="btn" id="arPrev">Ver sem câmara</button>
       <a class="btn" id="dl" download="cartao-caçadores-da-luz.jpg" style="display:inline-flex;align-items:center;text-decoration:none">Descarregar cartão</a>
     </div>
-    <details>
-      <summary>Para o professor: pôr o modo RA a funcionar</summary>
-      <p>A câmara só funciona numa página aberta diretamente num endereço seguro (https). Aloja o ficheiro <code>index.html</code> no GitHub Pages, no Netlify Drop ou no site da escola e partilha esse endereço com os alunos.</p>
-      <p>O cartão é preparado automaticamente na primeira vez (demora alguns segundos). Para arrancar mais depressa, compila a imagem do cartão no compilador online do MindAR e coloca o ficheiro <code>cartao.mind</code> na mesma pasta do <code>index.html</code>.</p>
-      <p>Se o reconhecimento do cartão falhar, a página passa para um modo simples: a fotografia fica por cima da imagem da câmara, sem se prender ao cartão.</p>
-    </details>
   </div>
   <img class="card" id="cardImg" alt="Cartão-marcador Caçadores da Luz com os ícones de abertura, velocidade e ISO">
 </div></section>
 
-<footer>Estúdio da Luz · A simulação exagera alguns efeitos para que sejam mais fáceis de observar.</footer>
+<footer>Caçadores de Luz · A simulação exagera alguns efeitos para que sejam mais fáceis de observar.</footer>
 
 <div id="ar" hidden>
   <div id="arStage"></div>
@@ -463,12 +457,12 @@ async function camOnly(why){
     v.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover';stage.appendChild(v);await v.play().catch(()=>{});
     flt.className='cam';flt.innerHTML='<div class="stack"></div>';flt.firstChild.appendChild(cv);redraw();
     msg(why+' Modo simples: a fotografia fica por cima da imagem da câmara.');
-  }catch(e){preview('A câmara não está disponível aqui. Abre a versão alojada em https (ver “Para o professor”).')}}
+  }catch(e){preview('A câmara não está disponível aqui. Abre a página no endereço https do site.')}}
 $('#arGo').addEventListener('click',async()=>{
   openAR();msg('A pedir acesso à câmara…');
-  if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia){preview('Esta página não pode usar a câmara aqui. Abre a versão alojada em https (ver “Para o professor”).');return}
+  if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia){preview('Esta página não pode usar a câmara aqui. Abre a página no endereço https do site.');return}
   try{const p=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});p.getTracks().forEach(t=>t.stop())}
-  catch(e){preview(e&&e.name==='NotAllowedError'?'Sem autorização para a câmara. Autoriza-a nas definições do navegador ou abre a versão alojada em https.':'A câmara não está disponível aqui. Abre a versão alojada em https (ver “Para o professor”).');return}
+  catch(e){preview(e&&e.name==='NotAllowedError'?'Sem autorização para a câmara. Autoriza-a nas definições do navegador.':'A câmara não está disponível aqui. Abre a página no endereço https do site.');return}
   try{
     msg('A carregar a realidade aumentada…');
     if(!window.AFRAME)await loadFirst(LIB.aframe);
